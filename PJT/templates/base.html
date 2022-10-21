@@ -40,7 +40,7 @@
                 <a class="nav-link" href="{% url 'accounts:profile' user.pk %}">Hello,
                   {{ request.user.username }}</a>
               </li>
-              <a class="nav-link mx-2" href="{% url 'accounts:logout' %}">Sign Out</a>
+              <a class="nav-link mx-2" href="{% url 'accounts:logout' %}">Logout</a>
             </ul>
             <!-- guest -->
           {% else %}
