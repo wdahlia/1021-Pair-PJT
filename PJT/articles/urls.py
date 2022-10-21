@@ -5,10 +5,14 @@ app_name = "articles"
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path('create/', views.create, name="create"),
-    path('<int:review_pk>/', views.detail, name="detail"),
-    path('<int:review_pk>/update', views.update, name="update"),
-    path('<int:review_pk>/delete/', views.delete, name="delete"),
+    path("create/", views.create, name="create"),
+    path("<int:review_pk>/", views.detail, name="detail"),
+    path("<int:review_pk>/update", views.update, name="update"),
+    path("<int:review_pk>/delete/", views.delete, name="delete"),
     path("<int:pk>/comments/", views.comment_create, name="comment_create"),
-    path("<int:pk>/comments/<int:pk>/delete/", views.comment_delete, name="comment_delete"),
+    path(
+        "<int:review_pk>/comments/<int:comment_pk>/delete/",
+        views.comment_delete,
+        name="comment_delete",
+    ),
 ]
