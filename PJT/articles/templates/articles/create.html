@@ -5,7 +5,7 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-  <div class="container">
+  {% comment %} <div class="container">
     <div class="text-center text-white">
       <h1>Review</h1>
     </div>
@@ -14,6 +14,26 @@
       {% bootstrap_form create_form %}
       <div class="text-end">
         <input type="submit" class="btn btn-dark" value="글 작성">
+      </div>
+    </form>
+    </div> {% endcomment %}
+
+    <div class="container d-flex justify-content-center py-5">
+      <div class="card col-8 review-detail">
+          {% comment %} <div class="review-detail rounded-4 shadow-lg p-5"> {% endcomment %}
+        <h1 class="text-center mt-5 mb-3 fs-3 fw-bold text-white">Review</h1>
+        <div class="card-body">
+          <form action="" method="POST" class="text-white">
+            {% csrf_token %}
+            {% bootstrap_form create_form %}
+            <div class="text-end">
+              <input type="submit" value="Save" class="px-3 py-2 my-2 rounded-1">
+            </div>
+            {% comment %} <div class="text-end">
+              <input type="submit" class="btn btn-dark" value="글 작성">
+            </div> {% endcomment %}
+          </form>
+        </div>
       </div>
     </div>
   {% endblock content %}
