@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Review, Comment
+from .models import Review, Comment, Movie
 from .forms import ReviewForm, CommentForm, MovieForm
 from django.contrib.auth.decorators import login_required
 
@@ -8,23 +8,26 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     reviews = Review.objects.order_by("-id")
-
+    movies = Movie.objects.order_by("-id")
     context = {
         "reviews": reviews,
+        "movies": movies,
     }
 
     return render(request, "articles/index.html", context)
 
 
 @login_required
-def create(request):
+def create(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
     if request.method == "POST":
         create_form = ReviewForm(request.POST)
         if create_form.is_valid():
             review = create_form.save(commit=False)
             review.user = request.user
+            review.movie = movie
             create_form.save()
-            return redirect("articles:index")
+            return redirect("articles:moviedetail", movie_pk)
 
     else:
         create_form = ReviewForm()
@@ -74,7 +77,7 @@ def update(request, review_pk):
         "update_form": update_form,
     }
 
-    return render(request, "articles/update.html", context)
+    return render(request, "articles/create.html", context)
 
 
 @login_required
@@ -98,12 +101,11 @@ def comment_delete(request, review_pk, comment_pk):
 @login_required
 def movie(request):
     if request.method == "POST":
-        movie_form = MovieForm(request.POST)
+        movie_form = MovieForm(request.POST, request.FILES)
         if movie_form.is_valid():
-            movie_form = MovieForm(commit=False)
+
             movie_form.save()
             return redirect("articles:index")
-
     else:
         movie_form = MovieForm()
 
@@ -112,3 +114,14 @@ def movie(request):
     }
 
     return render(request, "articles/movie.html", context)
+
+
+@login_required
+def moviedetail(request, movie_pk):
+    reviews = Review.objects.filter(movie=movie_pk)
+    movie = Movie.objects.get(pk=movie_pk)
+    context = {
+        "movie": movie,
+        "reviews": reviews,
+    }
+    return render(request, "articles/moviedetail.html", context)
