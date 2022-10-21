@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+<img src="{{ movie.image.url }}">
+<div class="container">
+    {{ movie.title }}
+    {{ movie.summary }}
+    {{ movie.director }}
+    {{ movie.releasedate }}
+    {{ movie.jenre }}
+    {{ movie.runningtime }}
+    <a href="{% url 'articles:create' movie.pk %}">리뷰 작성</a>
+    {% for review in reviews %}
+    <div class="row-cols-1 row-cols-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'articles:detail' review.pk %}">
+                        <h1>{{ review.title }}</h1>
+                    </a>
+                    <a href="{% url 'articles:delete' review.pk %}" class="text-decoration-none">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+                <hr>
+                <h5></h5>
+                <h6>점수 : {{ review.grade }}</h6>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
