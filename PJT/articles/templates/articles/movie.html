@@ -5,7 +5,7 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-  <div class="container d-flex justify-content-center align-items-center">
+  {% comment %} <div class="container d-flex justify-content-center align-items-center">
     <div class="bg-white rounded-5">
       <h2>Add Movie</h2>
       <form action="" method="POST" enctype="multipart/form-data" class="text-dark p-5">
@@ -13,6 +13,21 @@
         {% bootstrap_form movie_form %}
         <input type="submit" class="btn btn-warning" value="글 작성">
       </form>
+    </div>
+  </div> {% endcomment %}
+
+  <div class="container d-flex justify-content-center py-5">
+    <div class="card col-9 review-detail">
+      <h1 class="text-center mt-5 fs-3 fw-bold text-white">Add Movie</h1>
+      <div class="card-body">
+        <form action="" method="POST" enctype="multipart/form-data" class="text-dark px-5 py-3">
+          {% csrf_token %}
+          {% bootstrap_form movie_form %}
+          <div class="text-end">
+          <input type="submit" class="btn btn-warning mt-2" value="Save">
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 {% endblock content %}
