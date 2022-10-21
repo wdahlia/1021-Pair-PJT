@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect
 from .models import Review, Comment, Movie
 from .forms import ReviewForm, CommentForm, MovieForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg, Max, Min, Sum
 
 # Create your views here.
 
 
 def index(request):
-    reviews = Review.objects.order_by("-id")
-    movies = Movie.objects.order_by("-id")
+    reviews = Review.objects.all()
+    movies = Movie.objects.all()
     context = {
         "reviews": reviews,
         "movies": movies,
@@ -42,7 +43,6 @@ def create(request, movie_pk):
 @login_required
 def delete(request, review_pk):
     Review.objects.get(pk=review_pk).delete()
-
     return redirect("articles:index")
 
 
@@ -125,3 +125,10 @@ def moviedetail(request, movie_pk):
         "reviews": reviews,
     }
     return render(request, "articles/moviedetail.html", context)
+
+
+@login_required
+def movie_delete(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    movie.delete()
+    return redirect("articles:index")
