@@ -28,13 +28,13 @@
             </p>
             <div class="d-flex">
                 <div class="text-center me-5 my-2">
-                    <a class="p-0 btn border-white btn-lg border-0" href="">
+                    <a class="p-0 btn btn-lg border-0 text-white" href="">
                         <span class="bi bi-share fs-2"></span>
                         <p class="small">Share</p>
                     </a>
                 </div>
                 <div class="text-center me-4 my-2">
-                    <a class="p-0 btn border-white btn-lg border-0" href="">
+                    <a class="p-0 btn btn-lg border-0 text-white" href="">
                         <span class="bi bi-heart fs-2"></span>
                         <p class="small">Like</p>
                     </a>
@@ -42,28 +42,31 @@
             </div>
             <p class="text-white">{{ movie.summary }}</p>
         </div>
-</div>
-</section>
-<a href="{% url 'articles:movie_delete' movie.pk %}">영화 삭제</a>
-<a href="{% url 'articles:create' movie.pk %}">리뷰 작성</a>
-{% for review in reviews %}
-<div class="row-cols-1 row-cols-md-4">
-    <div class="card h-100">
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <a href="{% url 'articles:detail' review.pk %}">
-                    <h1>{{ review.title }}</h1>
-                </a>
-                <a href="{% url 'articles:delete' review.pk %}" class="text-decoration-none">
-                    <i class="bi bi-x-lg"></i>
-                </a>
-            </div>
-            <hr>
-            <h5></h5>
-            <h6>점수 : {{ review.grade }}</h6>
-        </div>
+    </section>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-secondary" href="{% url 'articles:create' movie.pk %}">review</a>
     </div>
-</div>
-{% endfor %}
+    <div class="row-cols-2 row-cols-md-3">
+        {% for review in reviews %}
+        <div class="card h-100 bg-black">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <a class="text-white text-decoration-none" href="{% url 'articles:detail' review.pk %}">
+                        <h4>{{ review.title }}</h2>
+                    </a>
+                    <a href="{% url 'articles:delete' review.pk %}" class="text-white small text-decoration-none">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+                <hr>
+                <h5></h5>
+                <h6 class="text-white">점수 : {{ review.grade }}</h6>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-danger" href="{% url 'articles:movie_delete' movie.pk %}">delete movie</a>
+    </div>
 </div>
 {% endblock content %}
