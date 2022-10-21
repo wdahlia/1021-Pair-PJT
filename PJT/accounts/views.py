@@ -10,6 +10,7 @@ from django.contrib.auth import (
 from django.contrib.auth.decorators import login_required
 from .models import User
 from django.contrib import messages
+import random
 
 
 def signup(request):
@@ -63,7 +64,12 @@ def profile(request, pk):
 @login_required
 def userlist(request):
     users = User.objects.all()
+    profile = ['https://cdn.pixabay.com/photo/2021/04/05/15/55/neptune-6153867_960_720.png']
+
+    profile_image = random.choice(profile)
+ 
     context = {
+        "profile_image": profile_image,
         "users": users,
     }
     return render(request, "accounts/userlist.html", context)
