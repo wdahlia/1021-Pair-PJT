@@ -5,33 +5,65 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<img src="{{ movie.image.url }}">
-<div class="container">
-    {{ movie.title }}
-    {{ movie.summary }}
-    {{ movie.director }}
-    {{ movie.releasedate }}
-    {{ movie.jenre }}
-    {{ movie.runningtime }}
-    <a href="{% url 'articles:create' movie.pk %}">리뷰 작성</a>
-    {% for review in reviews %}
-    <div class="row-cols-1 row-cols-md-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <a href="{% url 'articles:detail' review.pk %}">
-                        <h1>{{ review.title }}</h1>
-                    </a>
-                    <a href="{% url 'articles:delete' review.pk %}" class="text-decoration-none">
-                        <i class="bi bi-x-lg"></i>
+
+<div class="container m-5">
+    {% if movie.image %}
+    <div class="d-flex justify-content-center border border-5 border-dark rounded">
+        <img src="{{ movie.image.url }}">
+    </div>
+    {% endif %}
+    <section class="my-5 d-flex justify-content-center">
+        <div class="container mx-1">
+            <h1 class="text-white fw-bolder">{{ movie.title }}</h1>
+            <p class="text-white">
+                <span>평점 <span class="text-warning">★★★★★</span></span>
+                <span>·</span>
+                <span>{{ movie.jenre }}</span>
+                <span>·</span>
+                <span>{{ movie.runningtime }}분</span>
+                <span>·</span>
+                <span>감독 : {{ movie.director }}</span>
+                <span>·</span>
+                <span>개봉일 : {{ movie.releasedate }}</span>
+            </p>
+            <div class="d-flex">
+                <div class="text-center me-5 my-2">
+                    <a class="p-0 btn border-white btn-lg border-0" href="">
+                        <span class="bi bi-share fs-2"></span>
+                        <p class="small">Share</p>
                     </a>
                 </div>
-                <hr>
-                <h5></h5>
-                <h6>점수 : {{ review.grade }}</h6>
+                <div class="text-center me-4 my-2">
+                    <a class="p-0 btn border-white btn-lg border-0" href="">
+                        <span class="bi bi-heart fs-2"></span>
+                        <p class="small">Like</p>
+                    </a>
+                </div>
             </div>
+            <p class="text-white">{{ movie.summary }}</p>
+        </div>
+</div>
+</section>
+<a href="{% url 'articles:movie_delete' movie.pk %}">영화 삭제</a>
+<a href="{% url 'articles:create' movie.pk %}">리뷰 작성</a>
+{% for review in reviews %}
+<div class="row-cols-1 row-cols-md-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'articles:detail' review.pk %}">
+                    <h1>{{ review.title }}</h1>
+                </a>
+                <a href="{% url 'articles:delete' review.pk %}" class="text-decoration-none">
+                    <i class="bi bi-x-lg"></i>
+                </a>
+            </div>
+            <hr>
+            <h5></h5>
+            <h6>점수 : {{ review.grade }}</h6>
         </div>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 </div>
 {% endblock content %}
