@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form create_form %}
+    <input type="submit" class="btn btn-dark" value="글 작성">
+  </form>
+{% endblock content %}
