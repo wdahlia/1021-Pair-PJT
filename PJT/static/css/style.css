@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'belgro';
-  src: url('../font/Belgro.ttf') format('truetype');
+  font-family: "belgro";
+  src: url("../font/Belgro.ttf") format("truetype");
 }
 
 body {
   width: 100vw;
   height: auto;
-  font-family: 'belgro';
-  background-image: url('../images/universe.jpg');
+  font-family: "belgro";
+  background-image: url("../images/universe.jpg");
   background-repeat: no-epeat;
   background-size: cover;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 .review-detail {
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #8ca6bcc4;
 }
 

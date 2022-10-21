@@ -2,14 +2,15 @@
 {% block content %}
   {% load django_bootstrap5 %}
   <div class="container d-flex justify-content-center py-5">
-    <div class="card col-6">
+    <div class="card col-6 review-detail">
+        {% comment %} <div class="review-detail rounded-4 shadow-lg p-5"> {% endcomment %}
       <h1 class="text-center my-5 fs-3 fw-bold text-white">Login</h1>
       <div class="card-body">
         <form action="{% url 'accounts:login' %}" method="POST" class="text-white">
           {% csrf_token %}
           {% bootstrap_form form %}
           <div class="d-grid gap-2">
-            <button class="btn btn-primary mt-5 mb-2" type="submit">Log In</button>
+            <button class="btn btn-primary mt-5 mb-2" type="submit">Login</button>
             <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}" role="button">Create Account</a>
           </div>
         </form>
