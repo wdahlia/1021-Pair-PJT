@@ -2,32 +2,32 @@
 {% load static %}
 {% block content %}
 
-  <div class="container text-center py-5">
+<div class="container text-center py-5">
     <div class="row g-4 g-sm-4 g-md-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
-      {% for movie in movies %}
+        {% for movie in movies %}
         <div class="col">
-          <div class="card border border-5 border-warning shadow-lg text-bg-dark">
-            <a href="{% url 'articles:moviedetail' movie.pk %}">
-              {% if movie.thumbnail %}
-                <div class="card-hover">
-                  <img src="{{ movie.thumbnail.url }}" class="card-img-top" alt="...">
+            <div class="card border border-5 border-warning shadow-lg text-bg-dark">
+                <a href="{% url 'articles:moviedetail' movie.pk %}">
+                    {% if movie.thumbnail %}
+                    <div class="card-hover">
+                        <img src="{{ movie.thumbnail.url }}" class="card-img-top" alt="...">
+                    </div>
+                    {% else %}
+                    <div class="card-hover">
+                        <img src="{% static 'images/empty.jpg' %}" class="card-img-top" alt="...">
+                    </div>
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title m-0 fw-light">{{ movie.title }}</h5>
                 </div>
-              {% else %}
-                <div class="card-hover">
-                  <img src="{% static 'images/empty.jpg' %}" class="card-img-top" alt="...">
-                </div>
-              {% endif %}
-            </a>
-            <div class="card-body">
-              <h5 class="card-title m-0 fw-light">{{ movie.title }}</h5>
             </div>
-          </div>
         </div>
-      {% endfor %}
+        {% endfor %}
     </div>
     <div class="d-flex justify-content-end">
-      <a class="btn btn-secondary m-3" href="{% url 'articles:movie' %}">영화 만들기</a>
+        <a class="btn btn-secondary m-3 fw-bold" href="{% url 'articles:movie' %}">영화 만들기</a>
     </div>
-  </div>
+</div>
 
 {% endblock %}
