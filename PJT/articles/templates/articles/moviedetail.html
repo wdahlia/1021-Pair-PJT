@@ -59,7 +59,7 @@
     </div>
     <div class="d-flex justify-content-between mb-3 mt-5">
       <a class="btn btn-secondary" href="{% url 'articles:index' %}">Back</a>
-      <a class="btn btn-primary" href="{% url 'articles:create' movie.pk %}">Add Review</a>
+      <a class="btn btn-warning" href="{% url 'articles:create' movie.pk %}">Add Review</a>
     </div>
     {% if reviews %}
       <div class="review-back py-3 px-5 rounded-4">
