@@ -63,18 +63,16 @@ def detail(request, review_pk):
 @login_required
 def update(request, review_pk):
     review = Review.objects.get(pk=review_pk)
-
     if request.method == "POST":
-        update_form = ReviewForm(request.POST, instance=review)
-        if update_form.is_valid():
-            update_form.save()
-            return redirect("articles:index")
-
+        create_form = ReviewForm(request.POST, instance=review)
+        if create_form.is_valid():
+            create_form.save()
+            return redirect("articles:detail", review_pk)
     else:
-        update_form = ReviewForm(instance=review)
+        create_form = ReviewForm(instance=review)
 
     context = {
-        "update_form": update_form,
+        "create_form": create_form,
     }
 
     return render(request, "articles/create.html", context)
@@ -120,9 +118,40 @@ def movie(request):
 def moviedetail(request, movie_pk):
     reviews = Review.objects.filter(movie=movie_pk)
     movie = Movie.objects.get(pk=movie_pk)
+    grade = reviews.aggregate(avg=Avg("grade"))
+    cnt = reviews.count()
+    avg = "리뷰 없음"
+    star = ""
+    if grade["avg"]:
+        if grade["avg"] > 9.8:
+            star = "★★★★★"
+        elif grade["avg"] > 8.8:
+            star = "★★★★☆"
+        elif grade["avg"] > 7.8:
+            star = "★★★★"
+        elif grade["avg"] > 6.8:
+            star = "★★★☆"
+        elif grade["avg"] > 5.8:
+            star = "★★★"
+        elif grade["avg"] > 4.8:
+            star = "★★☆"
+        elif grade["avg"] > 3.8:
+            star = "★★"
+        elif grade["avg"] > 2.8:
+            star = "★☆"
+        elif grade["avg"] > 1.8:
+            star = "★"
+        elif grade["avg"] > 0.8:
+            star = "☆"
+        else:
+            avg = ""
+        avg = round(grade["avg"] / 2, 1)
     context = {
         "movie": movie,
         "reviews": reviews,
+        "star": star,
+        "avg": avg,
+        "cnt": cnt,
     }
     return render(request, "articles/moviedetail.html", context)
 

@@ -15,12 +15,15 @@
         <div class="container mx-1">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="text-white fw-bolder m-0">{{ movie.title }}</h1>
-                <a class="btn btn-danger" href="{% url 'articles:movie_delete' movie.pk %}">delete movie</a>
+                <a class="text-decoration-none text-danger" href="{% url 'articles:movie_delete' movie.pk %}">delete
+                    movie</a>
             </div>
             <hr class="mt-1 text-white">
             <p class="text-white">
                 <span>평점
-                    <span class="text-warning">★★★★★</span></span>
+                    <span class="text-warning fw-bold">{{ star }}</span>
+                    <span class="small">{{ avg }}({{ cnt }})</span>
+                </span>
                 <span>·</span>
                 <span>{{ movie.jenre }}</span>
                 <span>·</span>
@@ -53,6 +56,7 @@
     <div class="d-flex justify-content-end mb-3">
         <a class="btn btn-secondary" href="{% url 'articles:create' movie.pk %}">review</a>
     </div>
+    {% if reviews %}
     <div class="review-back py-3 px-5 rounded-4">
         {% for review in reviews %}
         <div class="d-flex justify-content-between mt-5">
@@ -71,6 +75,7 @@
         <hr class="fw-bolder">
         {% endfor %}
     </div>
+    {% endif %}
 </div>
 </div>
 {% endblock content %}
