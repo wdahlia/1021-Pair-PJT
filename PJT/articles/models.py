@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
@@ -13,8 +14,8 @@ class Movie(models.Model):
     title = models.CharField(max_length=30)
     summary = models.TextField()
     director = models.CharField(max_length=20)
-    runningtime = models.IntegerField()
-    releasedate = models.DateField()
+    runningtime = models.IntegerField(default=50)
+    releasedate = models.DateField(null=True)
     genrelist = (
         ("SF", "SF"),
         ("드라마", "드라마"),
