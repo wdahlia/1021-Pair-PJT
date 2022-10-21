@@ -15,28 +15,57 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light text-bg-light p-0 p-lg-0">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'articles:index' %}">
-          <img class="" src="{% static 'images/logo.png' %}" alt="logo" height="80">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 fs-5 d-flex justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="">회원가입</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">로그인</a>
-          </li>
-        </ul>
-      </div>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'articles:index' %}">
+                <img class="" src="{% static 'images/logo.png' %}" alt="logo" height="80">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 fs-5 d-flex justify-content-between">
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'accounts:userlist' %}">회원 목록</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:profile' user.pk %}">welcome, {{ user }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'accounts:logout' %}" method="POST">
+                            {% csrf_token %}
+                            <input class="bg-light border-0 nav-link" type="submit" value="로그아웃">
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:signup' %}">회원가입</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:login' %}">로그인</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
     </div>
-  </nav>
-  {% block content %}{% endblock content %}
-  {% bootstrap_javascript %}
+    {% endfor %}
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    {% bootstrap_javascript %}
+    <footer class="text-center py-2">
+        <div class="container sticky-bottom">
+            <p>Web-django PJT, by KP JS SJ</p>
+        </div>
+    </footer>
 </body>
 
 </html>
