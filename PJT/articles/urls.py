@@ -17,4 +17,5 @@ urlpatterns = [
         views.comment_delete,
         name="comment_delete",
     ),
+    path("<int:movie_pk>/movie_delete/", views.movie_delete, name="movie_delete"),
 ]

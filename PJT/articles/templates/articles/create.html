@@ -5,9 +5,15 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-  <form action="" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form create_form %}
-    <input type="submit" class="btn btn-dark" value="글 작성">
-  </form>
-{% endblock content %}
+  <div class="container">
+    <div class="text-center text-white">
+      <h1>Review</h1>
+    </div>
+    <form action="" method="POST" class="text-white">
+      {% csrf_token %}
+      {% bootstrap_form create_form %}
+      <div class="text-end">
+        <input type="submit" class="btn btn-dark" value="글 작성">
+      </div>
+    </div>
+  {% endblock content %}

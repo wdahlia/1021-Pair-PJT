@@ -3,9 +3,9 @@
   {% load django_bootstrap5 %}
   <div class="container d-flex justify-content-center py-5">
     <div class="card col-6">
-      <h1 class="text-center my-5 fs-3 fw-bold">Login</h1>
+      <h1 class="text-center my-5 fs-3 fw-bold text-white">Login</h1>
       <div class="card-body">
-        <form action="{% url 'accounts:login' %}" method="POST">
+        <form action="{% url 'accounts:login' %}" method="POST" class="text-white">
           {% csrf_token %}
           {% bootstrap_form form %}
           <div class="d-grid gap-2">
