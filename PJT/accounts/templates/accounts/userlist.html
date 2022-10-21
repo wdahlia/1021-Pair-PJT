@@ -3,22 +3,29 @@
 {% load django_bootstrap5 %}
 {% block content %}
   <div class="container py-5">
-    <div class="text-center">
+    <div class="text-center text-white">
       <h2>User list</h2>
     </div>
-    {% for user in users %}
-      <div class="card m-4">
-        <div class="card-body">
-          <img src="{{ profile_image }}" style="width: 5rem; height:5rem;">
-          <h4 class="card-subtitle my-2">{{ user.last_name }}{{ user.first_name }}</h4>
-          <h4 class="card-subtitle my-2">email :
-            {{ user.email }}</h4>
-          <p class="card-text">user no.
-            {{ user.pk }}</p>
-          <p class="card-text">joined at
-            {{ user.date_joined|date:'Y-m-d H:i:s' }}</p>
+    <div class="row row-cols-1 row-cols-md-2">
+      {% for user in users %}
+        <div class="col g-4 text-center">
+          <div class="card h-100 m-4 text-white">
+            <div class="card-body">
+              <img src="{{ profile_image }}" style="width: 10rem; height:10rem;" class="shadow-lg mb-3">
+              <h4 class="card-subtitle my-2">{{ user.last_name }}{{ user.first_name }}</h4>
+              <hr>
+              <div class="p-3 text-white text-bg-white opacity-75">
+                <h4 class="card-subtitle my-2 text-warning">
+                  {{ user.email }}</h4>
+                <p class="card-text m-0">user no.
+                  {{ user.pk }}</p>
+                <p class="card-text fs-6">joined at
+                  {{ user.date_joined|date:'Y-m-d H:i:s' }}</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 {% endblock content %}

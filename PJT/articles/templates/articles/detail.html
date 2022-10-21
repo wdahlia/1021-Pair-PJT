@@ -5,38 +5,40 @@
 
 {% block content %}
 
-<div class="container">
-  <h1>{{ review.title }}</h1>
-  <i></i>
-  <hr>
-  <pre>{{ review.content}}</pre>
-  {% if request.user == review.user %}
-  <a href="{% url 'articles:update' review.pk %}">수정</a>
-  {% endif %}
-  <form action="{% url 'articles:comment_create' review.pk %}" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form comment_form %}
-    <div class="text-end"><input class="btn btn-success" type="submit"></div>
-  </form>
-  <h4>댓글 ({{ comments|length }})</h4>
-  <hr>
-  <ul class="list-group list-group-flush">
-    {% for comment in comments %}
-    <li class="list-group-item align-middle">
-      <div class="d-flex justify-content-between">
-        <p class="card-text mx-2 py-3 my-0">{{ comment.user }}</p>
-        {% if request.user == comment.user %}
-        <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method="POST">
-          {% csrf_token %}
-          <input class="text-danger border-0 text-decoration-none" type="submit" value="삭제">
-        </form>
-        {% endif %}
-      </div>
-      <div class="m-2">
-        {{ comment.content }}
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
+  <div class="container d-flex flex-column justify-content-center my-5">
+    <div class="review-detail p-5 rounded-4 shadow-lg">
+      <h1 class="text-white font-space">{{ review.title }}</h1>
+      <i></i>
+      <hr>
+      <pre class="fs-6 text-black">{{ review.content}}</pre>
+      {% if request.user == review.user %}
+        <a href="{% url 'articles:update' review.pk %}" class="text-decoration-none">수정</a>
+      {% endif %}
+      <form action="{% url 'articles:comment_create' review.pk %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form comment_form %}
+        <div class="text-end"><input class="btn btn-success" type="submit"></div>
+      </form>
+      <h4 class="text-white">댓글 ({{ comments|length }})</h4>
+      <hr>
+      <ul class="list-group list-group-flush">
+        {% for comment in comments %}
+          <li class="list-group-item align-middle">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="card-text mx-2 my-2">{{ comment.user }}</p>
+              {% if request.user == comment.user %}
+                <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method="POST">
+                  {% csrf_token %}
+                  <input class="text-danger border-0 text-decoration-none" type="submit" value="삭제">
+                </form>
+              {% endif %}
+            </div>
+            <div class="m-2">
+              {{ comment.content }}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock content %}

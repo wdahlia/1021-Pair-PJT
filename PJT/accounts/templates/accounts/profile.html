@@ -4,7 +4,7 @@
 
   <div class="container d-flex flex-column align-items-center py-5">
     <div class="card mt-5 mb-4" style="width: 25rem;">
-      <div class="card-header text-bg-dark">
+      <div class="card-header text-white opacity-50">
         <h5 class="fs-3 fw-bold text-center my-1">
           {{ user.username }}
         </h5>
@@ -34,7 +34,7 @@
               <a class="dropdown-item" href="{% url 'accounts:update' %}" role="button">Edit My Info</a>
             </li>
             <li>
-              <hr class="dropdown-divider">
+              <hr class="dropdown-dividger">
             </li>
             <li>
               <a class="dropdown-item" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
