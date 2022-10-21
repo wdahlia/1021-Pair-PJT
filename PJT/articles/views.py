@@ -9,12 +9,11 @@ from django.db.models import Avg, Max, Min, Sum
 
 def index(request):
     reviews = Review.objects.all()
-    movies = Movie.objects.all()
+    movies = Movie.objects.order_by('-pk')
     context = {
         "reviews": reviews,
         "movies": movies,
     }
-
     return render(request, "articles/index.html", context)
 
 

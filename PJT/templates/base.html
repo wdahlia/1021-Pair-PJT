@@ -47,7 +47,7 @@
           {% else %}
             <ul class="navbar-nav">
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">Hello, Guest</a>
+                <a class="nav-link" href="{% url 'accounts:login' %}">Hello, Guest</a>
               </li>
 
               <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
