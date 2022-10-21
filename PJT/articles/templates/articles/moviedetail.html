@@ -5,26 +5,33 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-
-<div class="container m-5">
-    {% if movie.image %}
-    <div class="d-flex justify-content-center border border-5 border-dark rounded">
-        <img src="{{ movie.image.url }}">
-    </div>
-    {% endif %}
+{% if movie.image %}
+<div class="d-flex justify-content-center">
+    <img src="{{ movie.image.url }}" class="container">
+</div>
+{% endif %}
+<div class="container">
     <section class="my-5 d-flex justify-content-center">
         <div class="container mx-1">
-            <h1 class="text-white fw-bolder">{{ movie.title }}</h1>
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="text-white fw-bolder m-0">{{ movie.title }}</h1>
+                <a class="btn btn-danger" href="{% url 'articles:movie_delete' movie.pk %}">delete movie</a>
+            </div>
+            <hr class="mt-1 text-white">
             <p class="text-white">
-                <span>평점 <span class="text-warning">★★★★★</span></span>
+                <span>평점
+                    <span class="text-warning">★★★★★</span></span>
                 <span>·</span>
                 <span>{{ movie.jenre }}</span>
                 <span>·</span>
                 <span>{{ movie.runningtime }}분</span>
                 <span>·</span>
-                <span>감독 : {{ movie.director }}</span>
-                <span>·</span>
-                <span>개봉일 : {{ movie.releasedate }}</span>
+                <span>감독 :
+                    {{ movie.director }}</span>
+            </p>
+            <p class="text-white">
+                <span>개봉일 :
+                    {{ movie.releasedate }}</span>
             </p>
             <div class="d-flex">
                 <div class="text-center me-5 my-2">
@@ -43,30 +50,27 @@
             <p class="text-white">{{ movie.summary }}</p>
         </div>
     </section>
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end mb-3">
         <a class="btn btn-secondary" href="{% url 'articles:create' movie.pk %}">review</a>
     </div>
-    <div class="row-cols-2 row-cols-md-3">
+    <div class="review-back py-3 px-5 rounded-4">
         {% for review in reviews %}
-        <div class="card h-100 bg-black">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <a class="text-white text-decoration-none" href="{% url 'articles:detail' review.pk %}">
-                        <h4>{{ review.title }}</h2>
-                    </a>
-                    <a href="{% url 'articles:delete' review.pk %}" class="text-white small text-decoration-none">
-                        <i class="bi bi-x-lg"></i>
-                    </a>
-                </div>
-                <hr>
-                <h5></h5>
-                <h6 class="text-white">점수 : {{ review.grade }}</h6>
-            </div>
+        <div class="d-flex justify-content-between mt-5">
+            <a class="text-white text-decoration-none" href="{% url 'articles:detail' review.pk %}">
+                <h4 class="f">{{ review.title }}
+                </h4>
+                <span class="text-white fs-6">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    {{ review.grade }}
+                </span>
+            </a>
+            <a href="{% url 'articles:delete' review.pk %}" class="text-white small text-decoration-none">
+                <i class="bi bi-x-lg"></i>
+            </a>
         </div>
+        <hr class="fw-bolder">
         {% endfor %}
     </div>
-    <div class="d-flex justify-content-end">
-        <a class="btn btn-danger" href="{% url 'articles:movie_delete' movie.pk %}">delete movie</a>
-    </div>
+</div>
 </div>
 {% endblock content %}

@@ -55,7 +55,19 @@ def logout(request):
 @login_required
 def profile(request, pk):
     user = User.objects.get(pk=pk)
+    profile = ['https://cdn.pixabay.com/photo/2021/04/05/15/55/neptune-6153867_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/48/earth-6153854_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/52/jupiter-6153859_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/44/venus-6153849_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/53/saturn-6153860_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/44/mercury-6153848_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/48/moon-6153855_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/52/mars-6153858_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/54/uranus-6153865_960_720.png']
+
+    profile_image = random.choice(profile)
     context = {
+        "profile_image": profile_image,
         "user": user,
     }
     return render(request, "accounts/profile.html", context)
@@ -64,7 +76,15 @@ def profile(request, pk):
 @login_required
 def userlist(request):
     users = User.objects.all()
-    profile = ['https://cdn.pixabay.com/photo/2021/04/05/15/55/neptune-6153867_960_720.png']
+    profile = ['https://cdn.pixabay.com/photo/2021/04/05/15/55/neptune-6153867_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/48/earth-6153854_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/52/jupiter-6153859_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/44/venus-6153849_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/53/saturn-6153860_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/44/mercury-6153848_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/48/moon-6153855_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/52/mars-6153858_960_720.png',
+    'https://cdn.pixabay.com/photo/2021/04/05/15/54/uranus-6153865_960_720.png']
 
     profile_image = random.choice(profile)
  

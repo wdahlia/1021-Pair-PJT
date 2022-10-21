@@ -11,3 +11,24 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.card {
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.opacity-form {
+  opacity: 0.7;
+}
+
+.review-back {
+  background-color: rgba(0, 0, 0, 0.396);
+}
+
+.review-detail {
+  height: 100vh;
+  background-color: #8ca6bcc4;
+}
+
+.font-space {
+  letter-spacing: -1px;
+}

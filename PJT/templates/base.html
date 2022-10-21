@@ -15,10 +15,10 @@
 </head>
 
 <body class="background-img">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black p-0 p-lg-0">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black py-3">
+    <div class="container-fluid w-100">
       <a class="navbar-brand" href="{% url 'articles:index' %}">
-        <img class="" src="{% static 'images/logo.png' %}" alt="logo" height="80">
+        <img class="" src="{% static 'images/logo.png' %}" alt="logo" height="65">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,11 +59,10 @@
   </div>
   {% endfor %}
   {% endif %}
-  {% block content %}
-  {% endblock %}
+  {% block content %}{% endblock %}
   {% bootstrap_javascript %}
-  <footer class="text-center py-2">
-    <div class="container sticky-bottom">
+  <footer class="text-center">
+    <div class="position-fixed bottom-0 w-100">
       <p class="text-white">Web-django PJT, by KP JS SJ</p>
     </div>
   </footer>

@@ -6,6 +6,9 @@ class MovieForm(forms.ModelForm):
     class Meta:
         model = Movie
         fields = "__all__"
+        labels = {
+            'jenre': 'Genre',
+        }
         widgets = {
             "runningtime": forms.NumberInput(
                 attrs={
