@@ -8,6 +8,7 @@ from multiselectfield import MultiSelectField
 
 # Create your models here.
 
+
 class Movie(models.Model):
     title = models.CharField(max_length=30)
     summary = models.TextField()
@@ -15,17 +16,17 @@ class Movie(models.Model):
     runningtime = models.IntegerField()
     releasedate = models.DateField()
     genrelist = (
-    ("SF", "SF"),
-    ("드라마", "드라마"),
-    ("액션", "액션"),
-    ("모험", "모험"),
-    ("판타지", "판타지"),
-    ("멜로", "멜로"),
-    ("코미디", "코미디"),
-    ("느와르", "느와르"),
-    ("히어로", "히어로"),
-    ("공포", "공포"),
-    ("하이틴", "하이틴"),
+        ("SF", "SF"),
+        ("드라마", "드라마"),
+        ("액션", "액션"),
+        ("모험", "모험"),
+        ("판타지", "판타지"),
+        ("멜로", "멜로"),
+        ("코미디", "코미디"),
+        ("느와르", "느와르"),
+        ("히어로", "히어로"),
+        ("공포", "공포"),
+        ("하이틴", "하이틴"),
     )
     jenre = MultiSelectField(
         choices=genrelist,
@@ -33,18 +34,18 @@ class Movie(models.Model):
         max_choices=3,
     )
     image = ProcessedImageField(
-        blank=True, 
-        upload_to='images/',
+        blank=True,
+        upload_to="images/",
         processors=[ResizeToFill(720, 480)],
-        format='JPEG',
-        options={'quality': 100}
-        )
+        format="JPEG",
+        options={"quality": 100},
+    )
     thumbnail = ProcessedImageField(
-        upload_to='images/',
+        upload_to="images/",
         blank=True,
         processors=[ResizeToFill(700, 1000)],
-        format='JPEG',
-        options={'quality': 80}
+        format="JPEG",
+        options={"quality": 80},
     )
 
 

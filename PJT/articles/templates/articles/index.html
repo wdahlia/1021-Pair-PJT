@@ -2,26 +2,26 @@
 {% load static %}
 {% block content %}
 
-  <div class="container text-center py-5">
+<div class="container text-center py-5">
     {% for review in reviews %}
-      <div class="row-cols-1 row-cols-md-4">
+    <div class="row-cols-1 row-cols-md-4">
         <div class="card h-100">
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <a href="{% url 'articles:detail' review.pk %}">
-                <h1>{{ review.title }}</h1>
-              </a>
-              <a href="{% url 'articles:delete' review.pk %}" class="text-decoration-none">
-                <i class="bi bi-x-lg"></i>
-              </a>
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'articles:detail' review.pk %}">
+                        <h1>{{ review.title }}</h1>
+                    </a>
+                    <a href="{% url 'articles:delete' review.pk %}" class="text-decoration-none">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+                <hr>
+                <h5></h5>
+                <h6>{{ review.grade }}</h6>
             </div>
-            <hr>
-            <h5></h5>
-            <h6>{{ review.grade }}</h6>
-          </div>
         </div>
-      </div>
+    </div>
     {% endfor %}
-  </div>
-  <a href="{% url 'articles:create' %}">글 작성</a>
+</div>
+<a href="{% url 'articles:movie' %}">영화 만들기</a>
 {% endblock %}

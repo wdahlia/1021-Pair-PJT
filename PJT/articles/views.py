@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Review, Comment
-from .forms import ReviewForm, CommentForm
+from .forms import ReviewForm, CommentForm, MovieForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -93,3 +93,22 @@ def comment_create(request, pk):
 def comment_delete(request, review_pk, comment_pk):
     Comment.objects.get(pk=comment_pk).delete()
     return redirect("articles:detail", review_pk)
+
+
+@login_required
+def movie(request):
+    if request.method == "POST":
+        movie_form = MovieForm(request.POST)
+        if movie_form.is_valid():
+            movie_form = MovieForm(commit=False)
+            movie_form.save()
+            return redirect("articles:index")
+
+    else:
+        movie_form = MovieForm()
+
+    context = {
+        "movie_form": movie_form,
+    }
+
+    return render(request, "articles/movie.html", context)
