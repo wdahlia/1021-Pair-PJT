@@ -1,15 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load django_bootstrap5 %}
 {% block css %}{% endblock css %}
 
 {% block content %}
 
-  <div class="container">
-    <h1>{{ review.title }}</h1>
-    <i>{{ review.movie_name }}</i>
-    <hr>
-    <pre>{{ review.content}}</pre>
-    <a href="{% url 'articles:update' review.pk %}">수정</a>
-  </div>
-  {% endblock content %}
+<div class="container">
+  <h1>{{ review.title }}</h1>
+  <i>{{ review.movie_name }}</i>
+  <hr>
+  <pre>{{ review.content}}</pre>
+  {% if request.user == review.user %}
+  <a href="{% url 'articles:update' review.pk %}">수정</a>
+  {% endif %}
+  <form action="{% url 'articles:comment_create' review.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <div class="text-end"><input class="btn btn-success" type="submit"></div>
+  </form>
+  <h4>댓글 ({{ comments|length }})</h4>
+  <hr>
+  <ul class="list-group list-group-flush">
+    {% for comment in comments %}
+    <li class="list-group-item align-middle">
+      <div class="d-flex justify-content-between">
+        <p class="card-text mx-2 py-3 my-0">{{ comment.user }}</p>
+        {% if request.user == comment.user %}
+        <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method="POST">
+          {% csrf_token %}
+          <input class="text-danger border-0 text-decoration-none" type="submit" value="삭제">
+        </form>
+        {% endif %}
+      </div>
+      <div class="m-2">
+        {{ comment.content }}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}
