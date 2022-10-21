@@ -1,6 +1,10 @@
 from django import forms
-from .models import Review, Comment
+from .models import Review, Comment, Movie
 
+class MovieForm(forms.ModelForm):
+    class Meta:
+        model = Movie
+        fields = '__all__'
 
 class ReviewForm(forms.ModelForm):
     class Meta:
@@ -8,7 +12,6 @@ class ReviewForm(forms.ModelForm):
         fields = [
             "title",
             "content",
-            "movie_name",
             "grade",
         ]
         widgets = {

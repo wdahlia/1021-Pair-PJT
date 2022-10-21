@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "accounts",
     "django_bootstrap5",
     "multiselectfield",
+    "imagekit",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
