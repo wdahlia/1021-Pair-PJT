@@ -2,36 +2,33 @@
 {% load static %}
 {% block content %}
 
-  <div class="container text-center py-5">
-    <h2 class="text-center mb-5 text-white">All Movies</h2>
-    <div class="row g-4 g-sm-4 g-md-5 row-cols-1 row-cols-sm-2 row-cols-md-3">
-      {% for movie in movies %}
-        <div class="col mt-5 mb-4">
-          <div class="card h-100 border border-5 border-warning shadow-lg">
-            <a class="text-decoration-none" href="{% url 'articles:moviedetail' movie.pk %}">
-                <h5 class="card-header fw-bold py-3 bg-black text-light">
-                    {{ movie.title }}
-                </h5>
-              {% if movie.thumbnail %}
-                <div class="card-hover">
-                  <img src="{{ movie.thumbnail.url }}" class="card-img-top" alt="{{ movie.thumbnail }}">
-                </div>
-              {% else %}
-                <div class="card-hover">
-                  <img src="{% static 'images/empty.jpg' %}" class="card-img-top" alt="...">
-                </div>
-              {% endif %}
-            </a>
-            {% comment %} <div class="card-body">
-              <h5 class="card-title m-0 fw-bold">{{ movie.title }}</h5>
-            </div> {% endcomment %}
+<div class="container text-center py-5">
+  <h2 class="text-center mb-5 text-white">All Movies</h2>
+  <div class="row g-4 g-sm-4 g-md-5 row-cols-1 row-cols-sm-2 row-cols-md-3">
+    {% for movie in movies %}
+    <div class="col mt-5 mb-4">
+      <div class="card h-100 border border-5 border-warning shadow-lg">
+        <a class="text-decoration-none" href="{% url 'articles:moviedetail' movie.pk %}">
+          <h5 class="card-header fw-bold py-3 bg-black text-light">
+            {{ movie.title }}
+          </h5>
+          {% if movie.thumbnail %}
+          <div class="card-hover">
+            <img src="{{ movie.thumbnail.url }}" class="card-img-top" alt="{{ movie.thumbnail }}">
           </div>
-        </div>
-      {% endfor %}
+          {% else %}
+          <div class="card-hover">
+            <img src="{% static 'images/empty.jpg' %}" class="card-img-top" alt="...">
+          </div>
+          {% endif %}
+        </a>
+      </div>
     </div>
-    <div class="d-flex justify-content-end mt-4 fixed-bottom">
-        <a class="btn btn-warning m-5 fw-bold" href="{% url 'articles:movie' %}">Add Movie</a>
-    </div>
+    {% endfor %}
   </div>
+  <div class="d-flex justify-content-end mt-4 fixed-bottom">
+    <a class="btn btn-warning m-5 fw-bold" href="{% url 'articles:movie' %}">Add Movie</a>
+  </div>
+</div>
 
 {% endblock %}
