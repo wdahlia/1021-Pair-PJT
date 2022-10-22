@@ -3,8 +3,8 @@
   {% load django_bootstrap5 %}
 
   <div class="container d-flex flex-column align-items-center py-5">
-    <div class="card mt-5 mb-4" style="width: 25rem;">
-      <div class="card-header text-white opacity-50">
+    <div class="card mt-5 mb-4 border border-light" style="width: 25rem;">
+      <div class="card-header border border-light text-white opacity-75">
         <h5 class="fs-3 fw-bold text-center my-1">
           {{ user.username }}
         </h5>
@@ -13,12 +13,20 @@
         <img src="{{ profile_image }}" class="card-img-top rounded-1" style="width: 20rem; height: 20rem;" alt="...">
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">User No.
+        <li class="list-group-item">
+          <i class="bi bi-hash me-2"></i>
+          User No.
           {{ user.pk }}</li>
-        <li class="list-group-item">{{ user.first_name }}
+        <li class="list-group-item">
+          <i class="bi bi-person-fill me-2"></i>
+          {{ user.first_name }}
           {{ user.last_name }}</li>
-        <li class="list-group-item">{{ user.email }}</li>
-        <li class="list-group-item">Joined at
+        <li class="list-group-item">
+          <i class="bi bi-envelope-fill me-2"></i>
+          {{ user.email }}</li>
+        <li class="list-group-item">
+          <i class="bi bi-calendar-check-fill me-2"></i>
+          joined at
           {{ user.date_joined|date:'Y-m-d H:i' }}</li>
       </ul>
     </div>
@@ -26,7 +34,7 @@
     {% if request.user == user %}
       <div class="mb-5 d-flex justify-content-end">
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             Edit
           </button>
           <ul class="dropdown-menu">
@@ -34,7 +42,7 @@
               <a class="dropdown-item" href="{% url 'accounts:update' %}" role="button">Edit My Info</a>
             </li>
             <li>
-              <hr class="dropdown-dividger">
+              <hr class="dropdown-divider">
             </li>
             <li>
               <a class="dropdown-item" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
@@ -47,11 +55,11 @@
             </li>
           </ul>
         </div>
-        <a class=" btn btn-outline-secondary mx-3" href="{% url 'accounts:userlist' %}" role="button">Back</a>
+        <a class=" btn btn-secondary mx-3" href="{% url 'accounts:userlist' %}" role="button">Back</a>
       </div>
     {% else %}
       <div class="d-flex justify-content-end">
-        <a class=" btn btn-outline-secondary mx-3" href="{% url 'accounts:userlist' %}" role="button">Back</a>
+        <a class=" btn btn-secondary mx-3" href="{% url 'accounts:userlist' %}" role="button">Back</a>
       </div>
     {% endif %}
   </div>

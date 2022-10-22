@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
   {% load django_bootstrap5 %}
-  <div class="container py-5">
+  {% comment %} <div class="container py-5">
     <h1 class="text-white opacity-50 pb-3">
       Edit Profile
     </h1>
@@ -14,6 +14,25 @@
         <input type="submit" value="submit" class="text-dark px-3 py-2 rounded-1">
       </div>
     </form>
+  </div> {% endcomment %}
 
+  <div class="container d-flex justify-content-center py-5">
+    <div class="card col-6 review-detail">
+        {% comment %} <div class="review-detail rounded-4 shadow-lg p-5"> {% endcomment %}
+      <h1 class="text-center mt-5 mb-3 fs-3 fw-bold text-white">Edit Profile</h1>
+      <div class="card-body">
+        <form action="{% url 'accounts:update' %}" method="POST" class="text-dark px-5 py-3">
+          {% csrf_token %}
+          {% bootstrap_field form.email %}
+          {% bootstrap_field form.first_name %}
+          {% bootstrap_field form.last_name %}
+          <div class="text-end mt-4">
+            <input type="submit" class="btn btn-warning" value="Save">
+            <a class=" btn btn-dark ms-3" href="{% url 'accounts:profile' user.pk %}" role="button">Back</a>
+          </div>
+        </form>
+      </div>
+    </div>
+          
   </div>
 {% endblock content %}

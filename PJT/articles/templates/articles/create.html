@@ -19,19 +19,16 @@
     </div> {% endcomment %}
 
     <div class="container d-flex justify-content-center py-5">
-      <div class="card col-8 review-detail">
+      <div class="card col-9 review-detail">
           {% comment %} <div class="review-detail rounded-4 shadow-lg p-5"> {% endcomment %}
         <h1 class="text-center mt-5 mb-3 fs-3 fw-bold text-white">Review</h1>
         <div class="card-body">
-          <form action="" method="POST" class="text-white">
+          <form action="" method="POST" class="text-dark px-5 py-3">
             {% csrf_token %}
             {% bootstrap_form create_form %}
             <div class="text-end">
-              <input type="submit" value="Save" class="px-3 py-2 my-2 rounded-1">
+              <input type="submit" class="btn btn-warning mt-2" value="Save">
             </div>
-            {% comment %} <div class="text-end">
-              <input type="submit" class="btn btn-dark" value="글 작성">
-            </div> {% endcomment %}
           </form>
         </div>
       </div>
