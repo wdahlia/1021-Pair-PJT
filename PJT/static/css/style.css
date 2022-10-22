@@ -8,7 +8,7 @@ body {
   height: auto;
   font-family: "belgro";
   background-image: url("../images/universe.jpg");
-  background-repeat: no-epeat;
+  background-repeat: no-repeat;
   background-size: cover;
 }
 

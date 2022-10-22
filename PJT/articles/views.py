@@ -9,7 +9,7 @@ from django.db.models import Avg, Max, Min, Sum
 
 def index(request):
     reviews = Review.objects.all()
-    movies = Movie.objects.order_by('-pk')
+    movies = Movie.objects.order_by("-pk")
     context = {
         "reviews": reviews,
         "movies": movies,
@@ -100,7 +100,6 @@ def movie(request):
     if request.method == "POST":
         movie_form = MovieForm(request.POST, request.FILES)
         if movie_form.is_valid():
-
             movie_form.save()
             return redirect("articles:index")
     else:
@@ -160,3 +159,38 @@ def movie_delete(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
     movie.delete()
     return redirect("articles:index")
+
+
+def movie_update(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    if request.method == "POST":
+        movie_form = MovieForm(request.POST, request.FILES, instance=movie)
+        if movie_form.is_valid():
+            movie_form.save()
+            return redirect("articles:moviedetail", movie_pk)
+    else:
+        movie_form = MovieForm(instance=movie)
+
+    context = {
+        "movie_form": movie_form,
+    }
+
+    return render(request, "articles/movie.html", context)
+
+
+def search(request):
+    if request.method == "GET":
+        searched = request.GET.get("search")
+        if searched:
+            movies = Movie.objects.filter(title__contains=searched)
+            context = {
+                "search": searched,
+                "movies": movies,
+            }
+        else:
+            context = {
+                "search": searched,
+            }
+        return render(request, "articles/search.html", context)
+    else:
+        return render(request, "articles/index.html")

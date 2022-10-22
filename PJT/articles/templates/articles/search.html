@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container text-center py-5">
+    {% if movies %}
+    <h2 class="text-center mb-5 text-white">Search result "{{ search }}"</h2>
+    <div class="row g-4 g-sm-4 g-md-5 row-cols-1 row-cols-sm-2 row-cols-md-3">
+        {% for movie in movies %}
+        <div class="col mt-5 mb-4">
+            <div class="card h-100 border border-5 border-warning shadow-lg">
+                <a class="text-decoration-none" href="{% url 'articles:moviedetail' movie.pk %}">
+                    <h5 class="card-header fw-bold py-3 bg-black text-light">
+                        {{ movie.title }}
+                    </h5>
+                    {% if movie.thumbnail %}
+                    <div class="card-hover">
+                        <img src="{{ movie.thumbnail.url }}" class="card-img-top" alt="{{ movie.thumbnail }}">
+                    </div>
+                    {% else %}
+                    <div class="card-hover">
+                        <img src="{% static 'images/empty.jpg' %}" class="card-img-top" alt="...">
+                    </div>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2 class="text-center mb-5 text-white">No results were founded "{{ search }}"</h2>
+    <p class="text-center mb-5 text-white">Check that you have entered it correctly, including spaces.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
