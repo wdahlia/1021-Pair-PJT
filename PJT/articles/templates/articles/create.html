@@ -26,8 +26,9 @@
           <form action="" method="POST" class="text-dark px-5 py-3">
             {% csrf_token %}
             {% bootstrap_form create_form %}
-            <div class="text-end">
-              <input type="submit" class="btn btn-warning mt-2" value="Save">
+            <div class="text-end mt-4">
+              <input type="submit" class="btn btn-warning" value="Save">
+              {% comment %} <a class=" btn btn-dark ms-3" href="{% url 'articles:moviedetail' movie.pk %}" role="button">Back</a> {% endcomment %}
             </div>
           </form>
         </div>
